@@ -1,4 +1,3 @@
-
 function concat() {
     var y = document.getElementById("no1").value;
     var z = document.getElementById("no2").value;
@@ -9,6 +8,13 @@ function concat() {
     console.log(x);
     concat3();
 
+    analytics.identify('007', {
+
+        name: 'James Bond',
+      
+        email: 'jamesbond@gmail.com'
+      
+      })
 
     document.getElementById("p").innerHTML = x;
 }
@@ -26,3 +32,18 @@ function concat3() {
     document.getElementById("p").innerHTML = x;
 
 }
+
+function buy() {
+
+    analytics.track('shoes sold', {
+
+        title: 'Stilleto',
+      
+        subtitle: 'red-German',
+      
+        designer: 'Cucci'
+      
+      });
+
+}
+

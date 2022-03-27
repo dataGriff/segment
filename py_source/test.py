@@ -4,7 +4,7 @@
 import analytics
 import datetime
 
-analytics.write_key = 'FjMBtrIU3yRT7FaNUNKHXRf8KLcGBSep'
+analytics.write_key = ''
 
 ## https://segment.com/docs/connections/sources/catalog/libraries/server/python/#identify
 ## make this call when login, signup or page load

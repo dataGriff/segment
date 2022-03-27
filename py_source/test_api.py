@@ -3,7 +3,8 @@ import json
 import base64
 import datetime
 
-key = 'A8k2YAUcLw6b3I4dbniDAcE8NO9HLIgJ:'
+key = ''
+key = key+':' # need this to match segment required key criteria
 key_bytes = key.encode('ascii')
 base_key = base64.b64encode(key_bytes)
 base_key_str = base_key.decode('ascii')

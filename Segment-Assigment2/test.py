@@ -2,22 +2,16 @@ import logging
 import random
 import analytics
 
-print ("hello");
+analytics.write_key = ''
 
+analytics.identify('python-customer', {
 
-def isEven():
-    current_number = random.randint(1,100)
-    print (current_number)
-    if current_number % 2 != 0:
-        return "odd"
-    else:
-        return "even"
+    'email': 'Marg@gmail.com',
 
-wasiteven = isEven()
+    'name': 'Marg Not',
 
-print(wasiteven)
-print(wasiteven)
-print(wasiteven)
+    'friends': 30
 
+})
 
 
