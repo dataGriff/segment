@@ -4,23 +4,13 @@ import requests
 import json
 import re
 import os
+import segment_config
 import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-workspace = "googlemail-griff182uk"
-team_names_list = ["griffteam"]
-
-baseUrl = "https://platform.segmentapis.com/v1beta"
-workspaceUrl = f"{baseUrl}/workspaces/{workspace}"
-rolesUrl = f"{baseUrl}/workspaces/{workspace}/roles"
-policiesUrl = f"{baseUrl}/workspaces/{workspace}/roles/-/policies"
-invitesUrl = f"{baseUrl}/workspaces/{workspace}/invites"
-sourcesUrl = f"{baseUrl}/workspaces/{workspace}/sources"
-##need to be done per source...
-destinationsUrl = f"{baseUrl}/workspaces/{workspace}/sources/workshop_source/destinations"
-##needs to be done per destination
-destinationsFilterUrl = f"{baseUrl}/workspaces/{workspace}/sources/workshop_source/destinations/azure-function/filters"
+schema_file = 'schema/workspace.schema.json'
+my_segment_config =  segment_config.SegmentConfig(schema_file)
 
 bearer_token =  os.getenv('SEGMENT_TOKEN')
 headers = {
@@ -28,12 +18,38 @@ headers = {
   'Content-Type': 'application/json'
 }
 
-url = sourcesUrl
-payload={}
-response = requests.request("GET", url, headers=headers, data=payload)
-payload = response.json()
-dump = json.dumps(payload, indent=4) ##for debugging
-print(dump)
+sourcesUrl = my_segment_config.sourcesUrl
+response = segment_config.get_response(headers=headers,url=sourcesUrl)
+my_segment_sources = segment_config.SegmentSources(response)
+
+sources_test_result = my_segment_sources.get_sources_test_result()
+
+print(sources_test_result)
+
+# for source in my_segment_sources.sources:
+#   print(source.tags)
+
+
+
+# baseUrl = "https://platform.segmentapis.com/v1beta"
+# workspaceUrl = f"{baseUrl}/workspaces/{workspace}"
+# rolesUrl = f"{baseUrl}/workspaces/{workspace}/roles"
+# policiesUrl = f"{baseUrl}/workspaces/{workspace}/roles/-/policies"
+# invitesUrl = f"{baseUrl}/workspaces/{workspace}/invites"
+# sourcesUrl = f"{baseUrl}/workspaces/{workspace}/sources"
+# ##need to be done per source...
+# destinationsUrl = f"{baseUrl}/workspaces/{workspace}/sources/workshop_source/destinations"
+# ##needs to be done per destination
+# destinationsFilterUrl = f"{baseUrl}/workspaces/{workspace}/sources/workshop_source/destinations/azure-function/filters"
+
+
+
+# url = invitesUrl
+# payload={}
+# response = requests.request("GET", url, headers=headers, data=payload)
+# payload = response.json()
+# dump = json.dumps(payload, indent=4) ##for debugging
+# print(dump)
 
 # sources_list = (source_payload["sources"])
 

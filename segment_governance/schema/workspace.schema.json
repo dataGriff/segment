@@ -1,0 +1,117 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "description": "A workspace in segment.",
+    "required": [
+        "name",
+        "brands",
+        "tags",
+        "environments",
+        "products",
+        "teams",
+        "sourceTypes",
+        "destinationTypes",
+        "rules"
+    ],
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of the segment workspace.",
+            "value": "googlemail-griff182uk" 
+        },
+        "brands": {
+            "type": "array",
+            "description": "The brands expected in the segment workspace.",
+            "items": {
+                "enum": [
+                    "dogadopt",
+                    "griffco",
+                    "hungovercodes"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "tags": {
+            "type": "array",
+            "description": "The tags required on every source.",
+            "items": {
+                "enum": [
+                    "environment",
+                    "team",
+                    "product"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "environments": {
+            "type": "array",
+            "description": "The environments allowed in the environment tag.",
+            "items": {
+                "enum": [
+                    "dev",
+                    "uat",
+                    "prd"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "products": {
+            "type": "array",
+            "description": "The products allowed in the product tag.",
+            "items": {
+                "enum": [
+                    "product01",
+                    "product02"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "teams": {
+            "type": "array",
+            "description": "The teams allowed in the team tag.",
+            "items": {
+                "enum": [
+                    "crm",
+                    "product",
+                    "conversions"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "sourceTypes": {
+            "type": "array",
+            "description": "The source types allowed in source n.",
+            "items": {
+                "enum": [
+                    "website",
+                    "crm"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "destinationTypes": {
+            "type": "array",
+            "description": "The destination types allowed in destination names.",
+            "items": {
+                "enum": [
+                    "datawarehouse",
+                    "crm"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "rules": {
+            "type": "array",
+            "description": "The rules applied on the workspace.",
+            "items": {
+                "enum": [
+                    "Workspace: Must have SSO configured",
+                    "Source: Must have required tags",
+                    "Source: Must meet naming standard",
+                    "Destination: Must meet naming standard"
+                ]
+            },
+            "uniqueItems": true
+        }
+    }
+}
